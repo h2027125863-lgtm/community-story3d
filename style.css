@@ -1,532 +1,101 @@
-// ======================
-// 15分钟生活圈3D地图
-// ======================
+*{
 
+margin:0;
 
-const scene =
-new THREE.Scene();
+padding:0;
 
+box-sizing:border-box;
 
+}
 
-scene.background =
-new THREE.Color(
-0xf5f0e6
-);
 
+html,body{
 
+width:100%;
 
+height:100%;
 
-// 摄像机
+overflow:hidden;
 
-const camera =
-new THREE.PerspectiveCamera(
+font-family:
+"Microsoft YaHei";
 
-45,
+background:#f5efe5;
 
-window.innerWidth/
-window.innerHeight,
+}
 
-0.1,
 
-1000
 
-);
+#scene{
 
+position:absolute;
 
+width:100%;
 
-camera.position.set(
-0,
-10,
-15
-);
-
-
-
-camera.lookAt(
-0,
-0,
-0
-);
-
-
-
-// 渲染器
-
-const renderer =
-new THREE.WebGLRenderer({
-
-antialias:true
-
-});
-
-
-renderer.setSize(
-
-window.innerWidth,
-
-window.innerHeight
-
-);
-
-
-
-document
-.getElementById("scene")
-.appendChild(
-renderer.domElement
-);
-
-
-
-
-// 灯光
-
-scene.add(
-
-new THREE.AmbientLight(
-0xffffff,
-1
-)
-
-);
-
-
-
-
-// 图片加载器
-
-const loader =
-new THREE.TextureLoader();
-
-
-
-// ======================
-// 地图
-// ======================
-
-
-const mapTexture =
-loader.load(
-"assets/map.png"
-);
-
-
-
-const map =
-new THREE.Mesh(
-
-new THREE.PlaneGeometry(
-16,
-10
-),
-
-
-new THREE.MeshBasicMaterial({
-
-map:mapTexture,
-
-transparent:true
-
-})
-
-);
-
-
-
-map.rotation.x =
--Math.PI/3;
-
-
-
-scene.add(map);
-
-
-
-
-
-// ======================
-// 插画建筑加载函数
-// ======================
-
-
-function addBuilding(
-img,
-x,
-z,
-scale
-){
-
-
-const texture =
-loader.load(
-img
-);
-
-
-
-const sprite =
-new THREE.Sprite(
-
-new THREE.SpriteMaterial({
-
-map:texture,
-
-transparent:true
-
-})
-
-);
-
-
-
-sprite.scale.set(
-
-scale,
-
-scale,
-
-1
-
-);
-
-
-
-sprite.position.set(
-
-x,
-
-1,
-
-z
-
-);
-
-
-
-scene.add(sprite);
-
-
-
-return sprite;
+height:100%;
 
 }
 
 
 
 
+.story{
 
-// ======================
-// 添加社区元素
-// ======================
 
+position:absolute;
 
+left:50px;
 
-addBuilding(
+top:50px;
 
-"assets/home.png",
 
--5,
+width:380px;
 
-3,
 
-2
+padding:35px;
 
-);
 
+background:
+rgba(255,255,255,0.9);
 
 
-addBuilding(
+border-radius:20px;
 
-"assets/kindergarten.png",
 
--3,
+z-index:10;
 
-1,
 
-2
+box-shadow:
 
-);
-
-
-
-addBuilding(
-
-"assets/vegetable market.png",
-
-0,
-
-3,
-
-2
-
-);
-
-
-
-addBuilding(
-
-"assets/supermarket.png",
-
-3,
-
-2,
-
-2
-
-);
-
-
-
-addBuilding(
-
-"assets/hospital.png",
-
-5,
-
--1,
-
-2
-
-);
-
-
-
-addBuilding(
-
-"assets/bank.png",
-
-4,
-
-3,
-
-1.5
-
-);
-
-
-
-addBuilding(
-
-"assets/park.png",
-
-0,
-
--2,
-
-2
-
-);
-
-
-
-addBuilding(
-
-"assets/museum of science and technology.png",
-
-1,
-
--4,
-
-2
-
-);
-
-
-
-addBuilding(
-
-"assets/neighborhood committee.png",
-
--4,
-
--2,
-
-2
-
-);
-
-
-
-
-
-// ======================
-// 人物
-// ======================
-
-
-const personTexture =
-loader.load(
-
-"assets/character.png"
-
-);
-
-
-
-const person =
-new THREE.Sprite(
-
-new THREE.SpriteMaterial({
-
-map:personTexture,
-
-transparent:true
-
-})
-
-);
-
-
-
-person.scale.set(
-
-1.5,
-
-1.5,
-
-1
-
-);
-
-
-scene.add(person);
-
-
-
-// 起点
-
-person.position.set(
-
--5,
-
-1,
-
-3
-
-);
-
-
-
-
-
-// ======================
-// 路线
-// ======================
-
-
-const path=[
-
-
-[-5,3],
-
-
-[-3,1],
-
-
-[0,3],
-
-
-[3,2],
-
-
-[5,-1],
-
-
-[1,-4]
-
-];
-
-
-
-let step=0;
-
-
-
-
-function movePerson(){
-
-
-if(step>=path.length)
-return;
-
-
-
-let target =
-path[step];
-
-
-
-person.position.x +=
-
-(
-target[0]
--
-person.position.x
-)*0.01;
-
-
-
-person.position.z +=
-
-(
-target[1]
--
-person.position.z
-)*0.01;
-
-
-
-
-if(
-
-Math.abs(
-person.position.x-target[0]
-)<0.05
-
-&&
-
-Math.abs(
-person.position.z-target[1]
-)<0.05
-
-)
-
-{
-
-step++;
+0 10px 30px rgba(0,0,0,0.08);
 
 }
+
+
+
+.story h1{
+
+
+font-size:46px;
+
+color:#3d3d3d;
+
+margin-bottom:25px;
 
 
 }
 
 
 
+.story p{
 
 
-// ======================
-// 动画
-// ======================
+font-size:20px;
+
+line-height:2;
 
 
-function animate(){
-
-
-requestAnimationFrame(
-animate
-);
-
-
-movePerson();
-
-
-renderer.render(
-scene,
-camera
-);
+color:#555;
 
 
 }
-
-
-animate();
