@@ -1,0 +1,317 @@
+/* ==================================
+   月亮湖社区3D数据新闻
+   style.css
+================================== */
+
+
+
+/* 页面基础 */
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
+
+
+
+html,
+body{
+
+width:100%;
+
+height:100%;
+
+overflow:hidden;
+
+font-family:
+
+"Microsoft YaHei",
+sans-serif;
+
+}
+
+
+
+/* ================================
+   3D场景
+================================ */
+
+
+
+#scene{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+z-index:1;
+
+}
+
+
+
+/* ================================
+   故事文字区域
+================================ */
+
+
+.story{
+
+
+position:absolute;
+
+
+left:60px;
+
+
+top:80px;
+
+
+width:380px;
+
+
+padding:35px;
+
+
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.75
+);
+
+
+
+backdrop-filter:
+
+blur(8px);
+
+
+
+border-radius:20px;
+
+
+
+z-index:10;
+
+
+
+animation:
+
+fadeIn 2s ease;
+
+
+}
+
+
+
+
+/* 标题 */
+
+
+.story h1{
+
+
+font-size:42px;
+
+
+font-weight:700;
+
+
+letter-spacing:4px;
+
+
+margin-bottom:25px;
+
+
+
+color:#444;
+
+
+
+}
+
+
+
+/* 正文 */
+
+
+.story p{
+
+
+font-size:18px;
+
+
+line-height:2;
+
+
+
+color:#555;
+
+
+}
+
+
+
+
+
+/* ================================
+   数据标签
+================================ */
+
+
+
+.data{
+
+
+position:absolute;
+
+
+right:80px;
+
+
+bottom:100px;
+
+
+
+padding:20px 30px;
+
+
+
+background:
+
+rgba(
+255,
+255,
+255,
+0.8
+);
+
+
+
+border-radius:15px;
+
+
+
+font-size:28px;
+
+
+
+color:#555;
+
+
+
+z-index:20;
+
+
+}
+
+
+
+
+/* ================================
+   动画
+================================ */
+
+
+
+@keyframes fadeIn{
+
+
+from{
+
+
+opacity:0;
+
+
+transform:
+
+translateY(40px);
+
+
+}
+
+
+
+to{
+
+
+opacity:1;
+
+
+transform:
+
+translateY(0);
+
+
+}
+
+
+}
+
+
+
+
+/* ================================
+   手机适配
+================================ */
+
+
+
+@media(max-width:768px){
+
+
+.story{
+
+
+left:20px;
+
+
+top:30px;
+
+
+width:85%;
+
+
+padding:20px;
+
+
+}
+
+
+
+.story h1{
+
+
+font-size:28px;
+
+
+}
+
+
+
+.story p{
+
+
+font-size:15px;
+
+
+}
+
+
+
+}
