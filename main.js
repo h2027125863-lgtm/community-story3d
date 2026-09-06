@@ -1,12 +1,12 @@
 // =================================
-// 月亮湖社区15分钟生活圈
-// Three.js
+// 月亮湖社区 15分钟生活圈
+// 3D插画地图
 // =================================
+
 
 
 const scene =
 new THREE.Scene();
-
 
 
 scene.background =
@@ -23,7 +23,8 @@ new THREE.PerspectiveCamera(
 
 45,
 
-window.innerWidth/window.innerHeight,
+window.innerWidth /
+window.innerHeight,
 
 0.1,
 
@@ -36,23 +37,19 @@ camera.position.set(
 
 0,
 
-13,
+14,
 
 16
 
 );
 
 
-
 camera.lookAt(
-
 0,
-
 0,
-
 0
-
 );
+
 
 
 
@@ -77,6 +74,7 @@ window.innerHeight
 );
 
 
+
 document
 .getElementById("scene")
 .appendChild(
@@ -86,13 +84,13 @@ renderer.domElement
 
 
 
-// 光
+// 光照
 
 scene.add(
 
 new THREE.AmbientLight(
 0xffffff,
-1
+1.2
 )
 
 );
@@ -100,7 +98,8 @@ new THREE.AmbientLight(
 
 
 
-// 图片加载器
+
+// 图片加载
 
 const loader =
 new THREE.TextureLoader();
@@ -108,9 +107,9 @@ new THREE.TextureLoader();
 
 
 
-// =============================
+// =================================
 // 地图
-// =============================
+// =================================
 
 
 const mapTexture =
@@ -147,8 +146,7 @@ transparent:true
 
 
 map.rotation.x =
-- Math.PI/3;
-
+-Math.PI/3;
 
 
 scene.add(map);
@@ -156,15 +154,14 @@ scene.add(map);
 
 
 
+// =================================
+// 插画加载函数
+// =================================
 
-// =============================
-// 插画建筑函数
-// =============================
 
+function createSprite(
 
-function addPlace(
-
-path,
+url,
 
 x,
 
@@ -176,7 +173,7 @@ size
 
 
 const texture =
-loader.load(path);
+loader.load(url);
 
 
 
@@ -228,116 +225,160 @@ scene.add(sprite);
 
 
 
-// =============================
-// 社区元素
-// =============================
+// =================================
+// 添加社区设施
+// =================================
 
 
 
-addPlace(
+createSprite(
+
 "assets/home.png",
+
 -5,
+
 3,
+
 3
+
 );
 
 
 
-addPlace(
+createSprite(
+
 "assets/kindergarten.png",
+
 -3,
+
 1,
+
 2.5
+
 );
 
 
 
-addPlace(
-"assets/vegetable.png",
+createSprite(
+
+"assets/vegetable market.png",
+
 0,
+
 3,
+
 2.5
+
 );
 
 
 
-addPlace(
+createSprite(
+
 "assets/supermarket.png",
+
 3,
+
 2,
+
 2.5
+
 );
 
 
 
-addPlace(
+createSprite(
+
 "assets/hospital.png",
+
 5,
+
 -1,
+
 2.5
+
 );
 
 
 
-addPlace(
+createSprite(
+
 "assets/bank.png",
+
 4,
+
 3,
+
 2
+
 );
 
 
 
-addPlace(
+createSprite(
+
 "assets/park.png",
+
 0,
+
 -2,
+
 2.5
+
 );
 
 
 
-addPlace(
-"assets/museume.png",
+createSprite(
+
+"assets/museum of science and technology.png",
+
 1,
+
 -4,
+
 2.5
+
 );
 
 
 
-addPlace(
+createSprite(
+
 "assets/neighborhood committee.png",
+
 -4,
+
 -2,
+
 2.5
+
 );
 
 
 
 
 
-
-// =============================
+// =================================
 // 人物
-// =============================
+// =================================
 
 
-const womanTexture =
+const characterTexture =
 loader.load(
 
-"assets/woman.png"
+"assets/character.png"
 
 );
 
 
 
-const woman =
+const character =
 new THREE.Sprite(
 
 new THREE.SpriteMaterial({
 
-map:womanTexture,
+map:characterTexture,
 
 transparent:true
 
@@ -347,7 +388,7 @@ transparent:true
 
 
 
-woman.scale.set(
+character.scale.set(
 
 3,
 
@@ -359,7 +400,7 @@ woman.scale.set(
 
 
 
-woman.position.set(
+character.position.set(
 
 -5,
 
@@ -371,14 +412,15 @@ woman.position.set(
 
 
 
-scene.add(woman);
+scene.add(character);
 
 
 
 
-// =============================
+
+// =================================
 // 动画
-// =============================
+// =================================
 
 
 function animate(){
@@ -407,9 +449,10 @@ animate();
 
 
 
-// =============================
+
+// =================================
 // 自适应
-// =============================
+// =================================
 
 
 window.addEventListener(
