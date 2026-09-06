@@ -1,95 +1,442 @@
-*{
+// =================================
+// 月亮湖社区15分钟生活圈
+// Three.js
+// =================================
 
-margin:0;
-padding:0;
+
+const scene =
+new THREE.Scene();
+
+
+
+scene.background =
+new THREE.Color(
+0xf5efe5
+);
+
+
+
+// 摄像机
+
+const camera =
+new THREE.PerspectiveCamera(
+
+45,
+
+window.innerWidth/window.innerHeight,
+
+0.1,
+
+1000
+
+);
+
+
+camera.position.set(
+
+0,
+
+13,
+
+16
+
+);
+
+
+
+camera.lookAt(
+
+0,
+
+0,
+
+0
+
+);
+
+
+
+// 渲染器
+
+const renderer =
+new THREE.WebGLRenderer({
+
+antialias:true,
+
+alpha:true
+
+});
+
+
+renderer.setSize(
+
+window.innerWidth,
+
+window.innerHeight
+
+);
+
+
+document
+.getElementById("scene")
+.appendChild(
+renderer.domElement
+);
+
+
+
+
+// 光
+
+scene.add(
+
+new THREE.AmbientLight(
+0xffffff,
+1
+)
+
+);
+
+
+
+
+// 图片加载器
+
+const loader =
+new THREE.TextureLoader();
+
+
+
+
+// =============================
+// 地图
+// =============================
+
+
+const mapTexture =
+loader.load(
+
+"assets/map.png"
+
+);
+
+
+
+const map =
+new THREE.Mesh(
+
+new THREE.PlaneGeometry(
+
+18,
+
+10
+
+),
+
+
+new THREE.MeshBasicMaterial({
+
+map:mapTexture,
+
+transparent:true
+
+})
+
+);
+
+
+
+map.rotation.x =
+- Math.PI/3;
+
+
+
+scene.add(map);
+
+
+
+
+
+// =============================
+// 插画建筑函数
+// =============================
+
+
+function addPlace(
+
+path,
+
+x,
+
+z,
+
+size
+
+){
+
+
+const texture =
+loader.load(path);
+
+
+
+const sprite =
+new THREE.Sprite(
+
+new THREE.SpriteMaterial({
+
+map:texture,
+
+transparent:true
+
+})
+
+);
+
+
+
+sprite.scale.set(
+
+size,
+
+size,
+
+1
+
+);
+
+
+
+sprite.position.set(
+
+x,
+
+2,
+
+z
+
+);
+
+
+
+scene.add(sprite);
+
+
 
 }
 
 
-body{
 
-overflow:hidden;
 
-font-family:
-"Microsoft YaHei";
+// =============================
+// 社区元素
+// =============================
 
-background:#f5f0e6;
+
+
+addPlace(
+"assets/home.png",
+-5,
+3,
+3
+);
+
+
+
+addPlace(
+"assets/kindergarten.png",
+-3,
+1,
+2.5
+);
+
+
+
+addPlace(
+"assets/vegetable.png",
+0,
+3,
+2.5
+);
+
+
+
+addPlace(
+"assets/supermarket.png",
+3,
+2,
+2.5
+);
+
+
+
+addPlace(
+"assets/hospital.png",
+5,
+-1,
+2.5
+);
+
+
+
+addPlace(
+"assets/bank.png",
+4,
+3,
+2
+);
+
+
+
+addPlace(
+"assets/park.png",
+0,
+-2,
+2.5
+);
+
+
+
+addPlace(
+"assets/museume.png",
+1,
+-4,
+2.5
+);
+
+
+
+addPlace(
+"assets/neighborhood committee.png",
+-4,
+-2,
+2.5
+);
+
+
+
+
+
+
+// =============================
+// 人物
+// =============================
+
+
+const womanTexture =
+loader.load(
+
+"assets/woman.png"
+
+);
+
+
+
+const woman =
+new THREE.Sprite(
+
+new THREE.SpriteMaterial({
+
+map:womanTexture,
+
+transparent:true
+
+})
+
+);
+
+
+
+woman.scale.set(
+
+3,
+
+3,
+
+1
+
+);
+
+
+
+woman.position.set(
+
+-5,
+
+3,
+
+3
+
+);
+
+
+
+scene.add(woman);
+
+
+
+
+// =============================
+// 动画
+// =============================
+
+
+function animate(){
+
+
+requestAnimationFrame(
+animate
+);
+
+
+
+renderer.render(
+
+scene,
+
+camera
+
+);
+
 
 }
 
 
-
-#scene{
-
-position:absolute;
-
-width:100%;
-
-height:100%;
-
-}
+animate();
 
 
 
 
-.story{
+// =============================
+// 自适应
+// =============================
 
 
-position:absolute;
+window.addEventListener(
+
+"resize",
+
+()=>{
 
 
-left:50px;
-
-top:60px;
-
-
-width:360px;
+camera.aspect =
+window.innerWidth /
+window.innerHeight;
 
 
-padding:30px;
-
-
-background:
-
-rgba(255,255,255,.85);
+camera.updateProjectionMatrix();
 
 
 
-border-radius:20px;
+renderer.setSize(
 
+window.innerWidth,
 
-z-index:10;
+window.innerHeight
+
+);
 
 
 }
 
-
-.story h1{
-
-
-font-size:45px;
-
-
-color:#444;
-
-
-margin-bottom:25px;
-
-
-}
-
-
-
-.story p{
-
-
-font-size:18px;
-
-
-line-height:2;
-
-
-color:#555;
-
-
-}
+);
